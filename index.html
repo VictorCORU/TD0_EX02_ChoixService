@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr" data-ng-app="ServicesApp">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>Choix de service</title>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+        <script src="js/fr.js"></script>
+        <script src="js/ServicesApp.js"></script>
+        <script src="js/ServicesController.js"></script>
+
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel ="stylesheet" href="css/bootstrap.min.css"/>
+    </head>
+    <body data-ng-controller="ServicesController as ServicesCtrl">
+        <form id="services">
+            <div >
+               <h1 align="center">Services</h1>
+                <div class="alert alert-info">
+                    <span>Choisissez les éléments à inclure</span>
+                    <p>
+                        <ng-pluralize count="ServicesCtrl.servicesActifs"
+                                      when="{'0':'Aucun service sélectionné',
+				   			                 'one':'1 service sélectionné',
+											 'other':'{} services sélectionnés'}">
+                        </ng-pluralize>
+                    </p>
+                </div>
+                <ul>
+                    <li ng-repeat="serviceAct in ServicesCtrl.services" ng-click="ServicesCtrl.toggleActive(serviceAct)"
+                        ng-class="{active:serviceAct.active}">
+                        {{serviceAct.name}}
+                        <span class="ng-binding"> {{serviceAct.price|currency}}</span>
+                    </li>
+                </ul>
+
+            </div>
+        </form>
+    </body>
+</html>
